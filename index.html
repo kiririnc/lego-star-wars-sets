@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGO® STAR WARS™ 星球大战套组大全 · 2025-2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sw-yellow: #f5c518;
+    --sw-yellow-dim: #c79a0a;
+    --lego-red: #d01012;
+    --lego-yellow: #ffcf00;
+    --lego-blue: #006cb7;
+    --bg: #07070f;
+    --card: #12121f;
+    --card-border: #2a2a40;
+    --text: #e8e8f0;
+    --muted: #9a9ab0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: radial-gradient(ellipse at 50% 0%, #14142a 0%, var(--bg) 60%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  /* 星空 */
+  .stars, .stars2, .stars3 {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .stars { background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="20" cy="30" r="1" fill="white" opacity="0.7"/><circle cx="80" cy="120" r="0.7" fill="white" opacity="0.5"/><circle cx="150" cy="60" r="1.2" fill="white" opacity="0.8"/><circle cx="40" cy="170" r="0.6" fill="white" opacity="0.4"/><circle cx="180" cy="180" r="0.9" fill="white" opacity="0.6"/><circle cx="110" cy="20" r="0.5" fill="white" opacity="0.5"/></svg>'); }
+  .stars2 { background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><circle cx="50" cy="80" r="0.8" fill="%23f5c518" opacity="0.5"/><circle cx="200" cy="40" r="0.6" fill="white" opacity="0.6"/><circle cx="260" cy="220" r="1" fill="%23ffcf00" opacity="0.4"/><circle cx="120" cy="260" r="0.7" fill="white" opacity="0.5"/></svg>'); }
+  .wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  header { text-align: center; padding: 56px 20px 24px; }
+  .lego-badge {
+    display: inline-block; font-family: 'Orbitron', sans-serif; font-weight: 900;
+    background: var(--lego-red); color: #fff; padding: 4px 14px; border-radius: 4px;
+    letter-spacing: 1px; font-size: 13px; margin-bottom: 18px;
+    box-shadow: 0 3px 0 #7a0a0c;
+  }
+  h1 {
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: clamp(30px, 6vw, 58px);
+    color: var(--sw-yellow); letter-spacing: 2px; line-height: 1.1;
+    text-shadow: 0 0 24px rgba(245,197,24,0.35);
+  }
+  .subtitle { color: var(--muted); margin-top: 12px; font-size: 15px; }
+  .brick-divider { display: flex; gap: 6px; justify-content: center; margin: 28px 0 0; }
+  .brick { width: 44px; height: 16px; border-radius: 3px; }
+  .brick::before { content:''; display:block; width:10px; height:5px; border-radius:1px; margin:3px auto 0; background:rgba(0,0,0,0.25); }
+  .brick.red { background: var(--lego-red); } .brick.yellow { background: var(--lego-yellow); } .brick.blue { background: var(--lego-blue); }
+
+  .legend {
+    max-width: 760px; margin: 20px auto 0; padding: 14px 18px; border: 1px solid var(--card-border);
+    border-radius: 10px; background: rgba(18,18,31,0.8); font-size: 13px; color: var(--muted); line-height: 1.7;
+  }
+  .legend b { color: var(--text); }
+  .legend .rmb-tag { display:inline-block; padding:0 6px; border-radius:3px; font-size:12px; }
+  .rmb-tag.official { background:#123a1e; color:#5fd98a; } .rmb-tag.est { background:#3a2f10; color:#e0c060; }
+
+  section { margin: 44px 0 20px; }
+  .section-head { display:flex; align-items:center; gap: 14px; margin-bottom: 20px; }
+  .section-head h2 {
+    font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 26px; color: var(--sw-yellow);
+    letter-spacing: 1px; text-shadow: 0 0 14px rgba(245,197,24,0.3);
+  }
+  .section-head .count {
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 20px;
+    padding: 3px 12px; font-size: 13px; color: var(--muted);
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 12px;
+    overflow: hidden; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { transform: translateY(-5px); border-color: var(--sw-yellow-dim); box-shadow: 0 12px 28px rgba(0,0,0,0.5), 0 0 18px rgba(245,197,24,0.12); }
+  .card-img { background: #fff; padding: 14px; display:flex; align-items:center; justify-content:center; }
+  .card-img img { width: 100%; aspect-ratio: 1/1; object-fit: contain; }
+  .card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .sku { font-family: 'Orbitron', sans-serif; font-size: 12px; color: var(--lego-yellow); letter-spacing: 1px; }
+  .name { font-size: 15px; font-weight: 500; line-height: 1.4; min-height: 42px; }
+  .prices { margin-top: auto; display: flex; align-items: baseline; gap: 10px; border-top: 1px solid var(--card-border); padding-top: 10px; }
+  .price-usd { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 20px; color: #fff; }
+  .price-usd .cur { color: var(--sw-yellow); font-size: 15px; }
+  .price-rmb { font-size: 15px; font-weight: 700; margin-left: auto; }
+  .rmb.official { color: #5fd98a; }
+  .rmb.est { color: #e0c060; }
+
+  footer { text-align: center; padding: 40px 20px 60px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+  footer .bricks { display:flex; gap:5px; justify-content:center; margin-bottom: 16px; }
+  footer .bricks span { width:30px; height:11px; border-radius:2px; }
+</style>
+</head>
+<body>
+  <div class="stars"></div><div class="stars2"></div>
+  <div class="wrap">
+    <header>
+      <div class="lego-badge">LEGO® STAR WARS™</div>
+      <h1>STAR WARS<br>套组大全</h1>
+      <p class="subtitle">2025 年至 2026 年 · 乐高® 星球大战™ 发售套组</p>
+      <div class="brick-divider">
+        <span class="brick red"></span><span class="brick yellow"></span><span class="brick blue"></span>
+        <span class="brick red"></span><span class="brick yellow"></span><span class="brick blue"></span>
+        <span class="brick red"></span><span class="brick yellow"></span><span class="brick blue"></span>
+      </div>
+    </header>
+
+    <div class="legend">
+      <b>价格说明：</b>美元价为乐高美国官方零售价；人民币价中，
+      <span class="rmb-tag official">绿色</span> 为乐高中国官方零售价，
+      <span class="rmb-tag est">黄色「约」</span> 为按乐高中国定价规律估算（约 ×8.8，非官方）。
+      套组年份按乐高发售时间划分，个别套装可能略有出入。
+    </div>
+
+    <section id="y2026">
+      <div class="section-head"><h2>2026</h2><span class="count">33 套</span></div>
+      <div class="grid">
+      <div class="card" data-sku="75419">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt725a94446f56dbe2/75419_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Death Star™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75419</div>
+          <div class="name">Death Star™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>999.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥8499</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75420">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltc749a1a5e13267c8/blt225fee46fcc4a1f6-75420_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: Luke&#x27;s Landspeeder™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75420</div>
+          <div class="name">SMART Play™: Luke&#x27;s Landspeeder™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>39.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥359</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75421">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltb61ed1b9765cd542/75421_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: Darth Vader&#x27;s TIE Fighter™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75421</div>
+          <div class="name">SMART Play™: Darth Vader&#x27;s TIE Fighter™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75422">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt6c7d8ddda1eacc3d/blt61da93bd304bba10-75422_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: Yoda&#x27;s Hut and Jedi Training" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75422</div>
+          <div class="name">SMART Play™: Yoda&#x27;s Hut and Jedi Training</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75423">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt5083a28189d02095/75423_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: Luke&#x27;s Red Five X-Wing™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75423</div>
+          <div class="name">SMART Play™: Luke&#x27;s Red Five X-Wing™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>89.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥799</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75424">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt57e366b866a35097/blt25801572ad058379-75424_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: AT-ST™ Attack on Endor" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75424</div>
+          <div class="name">SMART Play™: AT-ST™ Attack on Endor</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>49.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥449</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75425">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt3d82314eafe19feb/bltea18a1c391dfe829-75425_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: Mos Eisley Cantina™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75425</div>
+          <div class="name">SMART Play™: Mos Eisley Cantina™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>79.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥709</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75426">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt3b90cd5ea56de0bd/bltcc4641b19ca76da2-75426_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: Millennium Falcon™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75426</div>
+          <div class="name">SMART Play™: Millennium Falcon™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>99.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥889</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75427">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltf279b650862f34ce/75427_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="SMART Play™: Throne Room Duel &amp; A-Wing™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75427</div>
+          <div class="name">SMART Play™: Throne Room Duel &amp; A-Wing™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>159.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1409</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75436">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltbcb5518970f01ece/75436_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="The Mandalorian &amp; Grogu&#x27;s Speeder Bike™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75436</div>
+          <div class="name">The Mandalorian &amp; Grogu&#x27;s Speeder Bike™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>9.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥89</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75437">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt74204d585275936e/75437_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Cobb Vanth&#x27;s Speeder" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75437</div>
+          <div class="name">Cobb Vanth&#x27;s Speeder</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>34.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥269</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75438">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltb6db6fdd0b580f9b/bltd3723768ca7a3d0b-75438_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Yoda™ Bust" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75438</div>
+          <div class="name">Yoda™ Bust</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>39.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥359</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75439">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt2c994d0128e3499c/blt87313c8eca3ce79a-75439_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Darth Vader™ Bust" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75439</div>
+          <div class="name">Darth Vader™ Bust</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>49.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥449</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75440">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt26f813f1a1f499c6/75440_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="AT-AT™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75440</div>
+          <div class="name">AT-AT™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>64.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥579</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75441">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltc42756bf25d0dfb6/75441_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Venator-Class Attack Cruiser™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75441</div>
+          <div class="name">Venator-Class Attack Cruiser™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>79.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥699</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75442">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt99c6a9bf2e0c2d9a/blt2f8fb720e38f6e09-75442_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="The Mandalorian&#x27;s N-1 Starfighter™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75442</div>
+          <div class="name">The Mandalorian&#x27;s N-1 Starfighter™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>249.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥2209</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75443">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt5cfc120f8db94ad2/75443_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Grogu&#x27;s Homestead" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75443</div>
+          <div class="name">Grogu&#x27;s Homestead</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>19.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥179</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75444">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt043955a8ee1e2706/blt1a085f1ef4d5c931-75444_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="AT-RT™ Attack" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75444</div>
+          <div class="name">AT-RT™ Attack</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>44.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥399</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75445">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt8ff7e21f8488b900/75445_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Anzellan Starship" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75445</div>
+          <div class="name">Anzellan Starship</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>74.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥669</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75446">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltb65ce1284755d194/blta8d62a90e62e020c-75446_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Grogu™ (Mandalorian Apprentice)" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75446</div>
+          <div class="name">Grogu™ (Mandalorian Apprentice)</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>129.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1149</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75447">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt34b27553596c6ef5/75447_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="The Razor Crest™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75447</div>
+          <div class="name">The Razor Crest™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>149.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1329</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75448">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blte3c4366369f7bc63/75448_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Clone Shock Trooper™ Mech" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75448</div>
+          <div class="name">Clone Shock Trooper™ Mech</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>14.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥129</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75449">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt0fdf83e6bf4515e8/75449_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Siege of Mandalore Battle Pack" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75449</div>
+          <div class="name">Siege of Mandalore Battle Pack</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>22.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥179</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75451">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltcbdf08565d92df57/75451_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Hutt Palace Sentry Droid Showdown" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75451</div>
+          <div class="name">Hutt Palace Sentry Droid Showdown</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>49.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥449</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75452">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltaeaf94035320fce0/75452_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="BB-8™ Astromech Droid" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75452</div>
+          <div class="name">BB-8™ Astromech Droid</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>89.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥799</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75453">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt53e994b7ffae6117/blt2993cb6d6e763651-75453_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Offworld Sandcrawler™ and Mudhorn" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75453</div>
+          <div class="name">Offworld Sandcrawler™ and Mudhorn</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>199.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1769</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75454">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt91d78d4aac6cb7b0/blt85d0f4c13827cddd-75454_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Imperial Remnant AT-AT™ with INT-4" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75454</div>
+          <div class="name">Imperial Remnant AT-AT™ with INT-4</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>159.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1409</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75455">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt01e72d2fd0c9fa53/blt0fed9d785e5abb17-75455_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Boba Fett™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75455</div>
+          <div class="name">Boba Fett™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>169.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1499</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75456">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltc5633fee6fa8abc1/blt691e598d84db744d-75456_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="LEGO® Star Wars™ Advent Calendar 2026" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75456</div>
+          <div class="name">LEGO® Star Wars™ Advent Calendar 2026</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>44.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥399</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75458">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt7116abf29dcb23bc/blt867ce7d8ae18e66a-75458_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Imperial Remnant AT-RT Driver™ Helmet" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75458</div>
+          <div class="name">Imperial Remnant AT-RT Driver™ Helmet</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75459">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltc25c22ecb800e962/bltdb45b22aa9b13e52-75459_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Imperial Lambda-Class Shuttle" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75459</div>
+          <div class="name">Imperial Lambda-Class Shuttle</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>139.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1239</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75460">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt3c7b337dee009946/75460_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="New Republic X-Wing Starfighter™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75460</div>
+          <div class="name">New Republic X-Wing Starfighter™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75461">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltb2efb2318d0ec931/blt5dd4a50337c9d86b-75461_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Up-Scaled Darth Vader™ Minifigure" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75461</div>
+          <div class="name">Up-Scaled Darth Vader™ Minifigure</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>99.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥889</span></div>
+          </div>
+        </div>
+      </div></div>
+    </section>
+
+    <section id="y2025">
+      <div class="section-head"><h2>2025</h2><span class="count">29 套</span></div>
+      <div class="grid">
+      <div class="card" data-sku="75400">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltd18c0e5a8d1cc2db/75400_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Plo Koon&#x27;s Jedi Starfighter™ Microfighter" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75400</div>
+          <div class="name">Plo Koon&#x27;s Jedi Starfighter™ Microfighter</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>14.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥139</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75402">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltd6b2fe663f886921/75402_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="ARC-170 Starfighter™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75402</div>
+          <div class="name">ARC-170 Starfighter™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75403">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt15f914b936f5b57a/75403_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Grogu™ with Hover Pram" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75403</div>
+          <div class="name">Grogu™ with Hover Pram</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>99.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥889</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75404">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt0a600ef56c840250/75404_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Acclamator-Class Assault Ship™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75404</div>
+          <div class="name">Acclamator-Class Assault Ship™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>49.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥449</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75405">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltb9adb5031a829a6d/75405_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Home One Starcruiser" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75405</div>
+          <div class="name">Home One Starcruiser</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75406">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt65ff8f8d2cbde1e0/75406_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Kylo Ren&#x27;s Command Shuttle" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75406</div>
+          <div class="name">Kylo Ren&#x27;s Command Shuttle</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75407">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt9ae67d7d9f7f24cc/75407_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Brick-Built Star Wars™ Logo" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75407</div>
+          <div class="name">Brick-Built Star Wars™ Logo</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>59.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥529</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75408">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt855daa4a629583f3/75408_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Jango Fett™ Helmet" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75408</div>
+          <div class="name">Jango Fett™ Helmet</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75409">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt616e72cc7801d6d0/75409_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Jango Fett&#x27;s Firespray-Class Starship" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75409</div>
+          <div class="name">Jango Fett&#x27;s Firespray-Class Starship</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>299.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥2599</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75410">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltfc8f5b203cd252ca/75410_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Mando and Grogu&#x27;s N-1 Starfighter™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75410</div>
+          <div class="name">Mando and Grogu&#x27;s N-1 Starfighter™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>29.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥269</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75411">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt4f3670cef99fd0d6/75411_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Darth Maul™ Mech" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75411</div>
+          <div class="name">Darth Maul™ Mech</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>17.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥159</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75412">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt4b92bb842cd8561f/75412_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Death Trooper &amp; Night Trooper Battle Pack" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75412</div>
+          <div class="name">Death Trooper &amp; Night Trooper Battle Pack</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>22.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥209</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75413">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt3e5d1d463262f82d/75413_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Republic Juggernaut" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75413</div>
+          <div class="name">Republic Juggernaut</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>159.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1409</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75414">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt833d87a2b9baebda/75414_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="The Force Burner Snowspeeder™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75414</div>
+          <div class="name">The Force Burner Snowspeeder™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>54.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥489</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75415">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt9c743ca969e32b04/75415_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Kylo Ren™ Helmet" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75415</div>
+          <div class="name">Kylo Ren™ Helmet</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75416">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt01e041de08bd7aa0/75416_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Chopper (C1-10P)™ Astromech Droid" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75416</div>
+          <div class="name">Chopper (C1-10P)™ Astromech Droid</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>99.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥889</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75417">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt98568413538e8f35/75417_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="AT-ST™ Walker" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75417</div>
+          <div class="name">AT-ST™ Walker</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>199.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1769</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75428">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt5677559d5974a4f3/75428_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Battle Droid™ with STAP" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75428</div>
+          <div class="name">Battle Droid™ with STAP</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>139.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1239</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75429">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltdd27a0cbc5886dd2/75429_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="AT-AT Driver™ Helmet" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75429</div>
+          <div class="name">AT-AT Driver™ Helmet</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75430">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt9d08d73b642816b6/75430_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Wicket the Ewok™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75430</div>
+          <div class="name">Wicket the Ewok™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>129.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1149</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75431">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt97ba3a3c6c9eac51/75431_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="327th Star Corps Clone Troopers™ Battle Pack" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75431</div>
+          <div class="name">327th Star Corps Clone Troopers™ Battle Pack</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>44.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥399</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75432">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt28d411b5749c5e6e/75432_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="V-19 Torrent Starfighter" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75432</div>
+          <div class="name">V-19 Torrent Starfighter</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>64.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥579</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75433">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltb16e6a44a966b120/75433_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Jango Fett&#x27;s Starship" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75433</div>
+          <div class="name">Jango Fett&#x27;s Starship</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>69.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥619</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75434">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltd1eef14539ca625d/75434_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="K-2SO™ Security Droid" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75434</div>
+          <div class="name">K-2SO™ Security Droid</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>89.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥799</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="75435">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt2b73e68649059dea/75435_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Battle of Felucia Separatist MTT™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">75435</div>
+          <div class="name">Battle of Felucia Separatist MTT™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>159.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥1409</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="40806">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt6d4c85ec676b3157/40806_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Gingerbread AT-AT™ Walker" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">40806</div>
+          <div class="name">Gingerbread AT-AT™ Walker</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>59.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥529</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="40795">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt2a1509f8ab66f757/40795_Prod_en-gb.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Luke Skywalker™ (Rebel Pilot)" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">40795</div>
+          <div class="name">Luke Skywalker™ (Rebel Pilot)</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>12.99</div>
+            <div class="price-rmb"><span class="rmb official" title="乐高中国官方价">¥89</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="40856">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/blt058ca53a47183c2a/40856_Prod.png?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="The Mandalorian and Grogu: Allies &amp; Villains" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">40856</div>
+          <div class="name">The Mandalorian and Grogu: Allies &amp; Villains</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>39.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥359</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-sku="5009387">
+        <div class="card-img"><img src="https://www.lego.com/cdn/cs/set/assets/bltb4c9c0c05a5551cb/5009387.jpg?fit=bounds&amp;width=500&amp;height=500&amp;format=png" alt="Master Yoda™" loading="lazy"></div>
+        <div class="card-body">
+          <div class="sku">5009387</div>
+          <div class="name">Master Yoda™</div>
+          <div class="prices">
+            <div class="price-usd"><span class="cur">$</span>8.99</div>
+            <div class="price-rmb"><span class="rmb est" title="按乐高中国定价估算，非官方">约 ¥79</span></div>
+          </div>
+        </div>
+      </div></div>
+    </section>
+
+    <footer>
+      <div class="bricks">
+        <span style="background:#d01012"></span><span style="background:#ffcf00"></span><span style="background:#006cb7"></span>
+        <span style="background:#d01012"></span><span style="background:#ffcf00"></span><span style="background:#006cb7"></span>
+      </div>
+      数据来源：LEGO.com 官方商城（美元/人民币价）· 图片来自 LEGO.com CDN<br>
+      本站为粉丝整理展示用途，非乐高官方页面。LEGO® 与 STAR WARS™ 为各自权利方的商标。
+    </footer>
+  </div>
+</body>
+</html>
